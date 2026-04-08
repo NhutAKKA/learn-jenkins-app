@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        HTTP_PROXY = "${JENKINS_HTTP_PROXY_URL}"
-        HTTPS_PROXY = "${JENKINS_HTTPS_PROXY_URL}"
-        NO_PROXY = "${JENKINS_NO_PROXY}"
-        http_proxy = "${JENKINS_HTTP_PROXY_URL}"
-        https_proxy = "${JENKINS_HTTPS_PROXY_URL}"
-        no_proxy = "${JENKINS_NO_PROXY}"
-        npm_config_proxy = "${JENKINS_HTTP_PROXY_URL}"
-        npm_config_https_proxy = "${JENKINS_HTTPS_PROXY_URL}"
+        HTTP_PROXY = "${env.JENKINS_HTTP_PROXY_URL}"
+        HTTPS_PROXY = "${env.JENKINS_HTTPS_PROXY_URL}"
+        NO_PROXY = "${env.JENKINS_NO_PROXY}"
+        http_proxy = "${env.JENKINS_HTTP_PROXY_URL}"
+        https_proxy = "${env.JENKINS_HTTPS_PROXY_URL}"
+        no_proxy = "${env.JENKINS_NO_PROXY}"
+        npm_config_proxy = "${env.JENKINS_HTTP_PROXY_URL}"
+        npm_config_https_proxy = "${env.JENKINS_HTTPS_PROXY_URL}"
         npm_config_registry = "https://registry.npmjs.org/"
     }
 
@@ -20,14 +20,14 @@ pipeline {
                     image 'node:18-alpine'
                     reuseNode true
                     args """
-                        -e HTTP_PROXY=${JENKINS_HTTP_PROXY_URL}
-                        -e HTTPS_PROXY=${JENKINS_HTTPS_PROXY_URL}
-                        -e NO_PROXY=${JENKINS_NO_PROXY}
-                        -e http_proxy=${JENKINS_HTTP_PROXY_URL}
-                        -e https_proxy=${JENKINS_HTTPS_PROXY_URL}
-                        -e no_proxy=${JENKINS_NO_PROXY}
-                        -e npm_config_proxy=${JENKINS_HTTP_PROXY_URL}
-                        -e npm_config_https_proxy=${JENKINS_HTTPS_PROXY_URL}
+                        -e HTTP_PROXY=${env.JENKINS_HTTP_PROXY_URL}
+                        -e HTTPS_PROXY=${env.JENKINS_HTTPS_PROXY_URL}
+                        -e NO_PROXY=${env.JENKINS_NO_PROXY}
+                        -e http_proxy=${env.JENKINS_HTTP_PROXY_URL}
+                        -e https_proxy=${env.JENKINS_HTTPS_PROXY_URL}
+                        -e no_proxy=${env.JENKINS_NO_PROXY}
+                        -e npm_config_proxy=${env.JENKINS_HTTP_PROXY_URL}
+                        -e npm_config_https_proxy=${env.JENKINS_HTTPS_PROXY_URL}
                         -e npm_config_registry=https://registry.npmjs.org/
                     """
                 }
