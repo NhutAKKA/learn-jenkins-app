@@ -33,6 +33,13 @@ pipeline {
                 }
             }
             steps {
+                // ensure git is available inside the docker agent and perform a full clone
+                sh 'apk add --no-cache git'
+                sh '''
+                    # remove any leftover .git then clone fresh into workspace
+                    rm -rf .git || true
+                    git clone --depth=1 https://github.com/NhutAKKA/learn-jenkins-app.git .
+                '''
                 sh'''
                     npm ci
                     npm run build
