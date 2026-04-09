@@ -39,5 +39,29 @@ pipeline {
                 '''
             }
         }
+        stage('Test') {
+            agent{
+                docker{
+                    image 'node:18-alpine'
+                    reuseNode true
+                    args """
+                        -e HTTP_PROXY=${env.HTTP_PROXY ?: ''}
+                        -e HTTPS_PROXY=${env.HTTPS_PROXY ?: ''}
+                        -e NO_PROXY=${env.NO_PROXY ?: ''}
+                        -e http_proxy=${env.http_proxy ?: ''}
+                        -e https_proxy=${env.https_proxy ?: ''}
+                        -e no_proxy=${env.no_proxy ?: ''}
+                        -e npm_config_proxy=${env.HTTP_PROXY ?: ''}
+                        -e npm_config_https_proxy=${env.HTTPS_PROXY ?: ''}
+                        -e npm_config_registry=https://registry.npmjs.org/
+                    """
+                }
+            }
+            steps {
+                sh'''
+                    npm test
+                '''
+            }
+        }
     }
 }
